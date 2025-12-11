@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MASAI-group | Multi-Agent Systems & AI Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="MASAI-group is a research group focused on multi-agent systems and artificial intelligence, strategic reasoning, and formal methods."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0e1224;
+      --card: #111827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1d2340 0, #050816 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to bottom,
+        rgba(5, 8, 22, 0.95),
+        rgba(5, 8, 22, 0.82),
+        transparent
+      );
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #38bdf8, #0ea5e9 40%, #1e293b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: inherit;
+      border: 1px solid rgba(15, 23, 42, 0.3);
+      backdrop-filter: blur(6px);
+    }
+
+    .logo-mark span {
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #e0f2fe;
+      z-index: 1;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text-main {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 0.72rem;
+      color: var(--text-soft);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.15rem;
+      color: var(--text-soft);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.2rem;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #e5e7eb;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.45rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #e5e7eb;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.14), transparent 55%);
+    }
+
+    .nav-cta:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Mobile nav */
+    .nav-toggle {
+      display: none;
+      cursor: pointer;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      border-radius: 999px;
+      padding: 0.35rem 0.55rem;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      margin: 3px 0;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      margin: 0.35rem 0;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      max-width: 480px;
+    }
+
+    /* Hero */
+    .hero {
+      padding-top: 6rem;
+      padding-bottom: 4.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3.1vw, 2.9rem);
+      line-height: 1.12;
+      margin: 0.4rem 0 0.8rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(90deg, #38bdf8, #a855f7, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .hero-lead {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.98rem;
+      max-width: 560px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem 1.5rem;
+      margin: 1.7rem 0 0.5rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hero-meta-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at center, #4ade80, #22c55e);
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.8);
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease,
+        background 0.12s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #0b1120;
+      box-shadow: 0 20px 45px rgba(37, 99, 235, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 26px 55px rgba(37, 99, 235, 0.7);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.8rem;
+      max-width: 440px;
+    }
+
+    .stat-card {
+      border-radius: var(--radius-lg);
+      padding: 0.9rem 1rem;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), #020617 80%);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.7);
+    }
+
+    .stat-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      margin-top: 0.1rem;
+    }
+
+    .hero-panel {
+      border-radius: 24px;
+      padding: 1.6rem;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.2), #020617 70%);
+      border: 1px solid rgba(15, 23, 42, 0.95);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-panel-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.7rem;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.28rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+    }
+
+    .hero-panel-strip {
+      border-radius: 999px;
+      padding: 0.55rem 0.75rem;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-top: 1.1rem;
+      font-size: 0.75rem;
+    }
+
+    .hero-panel-strip span:first-child {
+      color: var(--text-soft);
+    }
+
+    .hero-panel-strip strong {
+      color: #e5e7eb;
+    }
+
+    .hero-panel-footnote {
+      margin: 0.9rem 0 0;
+      font-size: 0.74rem;
+      color: var(--text-soft);
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.9;
+      mix-blend-mode: screen;
+    }
+
+    .hero-orbit-circle {
+      position: absolute;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.25);
+    }
+
+    .hero-orbit-circle:nth-child(1) {
+      width: 220px;
+      height: 220px;
+      top: -40px;
+      right: -30px;
+    }
+
+    .hero-orbit-circle:nth-child(2) {
+      width: 160px;
+      height: 160px;
+      bottom: -30px;
+      left: -20px;
+    }
+
+    .hero-orbit-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at center, #fde68a, #f97316);
+      box-shadow: 0 0 20px rgba(249, 115, 22, 0.9);
+      top: 22%;
+      right: 12%;
+    }
+
+    /* Cards layout */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.92), #020617 85%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 1.35rem 1.5rem;
+      box-shadow: 0 16px 38px rgba(15, 23, 42, 0.7);
+    }
+
+    .card-title {
+      font-size: 1.02rem;
+      margin: 0 0 0.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-pill {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      white-space: nowrap;
+    }
+
+    .card-text {
+      margin: 0.4rem 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-soft);
+    }
+
+    /* People */
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .person-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), #020617 85%);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.3rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .person-name {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .person-role {
+      margin: 0.15rem 0 0.35rem;
+      font-size: 0.82rem;
+      color: var(--accent);
+    }
+
+    .person-affiliation {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin: 0 0 0.6rem;
+    }
+
+    .person-meta {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .person-meta span {
+      display: block;
+    }
+
+    .person-meta a {
+      color: #bae6fd;
+    }
+
+    /* Publications */
+    .pub-list {
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .pub-item {
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .pub-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin: 0 0 0.25rem;
+    }
+
+    .pub-meta {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin: 0 0 0.25rem;
+    }
+
+    .pub-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+    }
+
+    .pub-link {
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+    }
+
+    .pub-link:hover {
+      border-color: var(--accent);
+    }
+
+    /* News & contact */
+    .news-list {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .news-item {
+      padding: 0.8rem 1rem;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1.3rem;
+      font-size: 0.86rem;
+    }
+
+    .news-date {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      white-space: nowrap;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 3fr 2.4fr;
+      gap: 2rem;
+    }
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.5rem;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), #020617 80%);
+      box-shadow: var(--shadow-soft);
+      font-size: 0.9rem;
+    }
+
+    .contact-card p {
+      margin-top: 0.4rem;
+      color: var(--text-soft);
+    }
+
+    .contact-details {
+      margin-top: 0.9rem;
+      font-size: 0.9rem;
+    }
+
+    .contact-details div {
+      margin-bottom: 0.35rem;
+    }
+
+    .contact-details span {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .contact-details a {
+      color: #bae6fd;
+    }
+
+    .contact-note {
+      font-size: 0.8rem;
+      margin-top: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .contact-aside {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    .contact-aside ul {
+      padding-left: 1.1rem;
+      margin: 0.4rem 0 0;
+    }
+
+    .contact-aside li {
+      margin-bottom: 0.25rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(15, 23, 42, 0.95);
+      padding: 1.4rem 1.5rem 1.6rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 5.5rem;
+      }
+      .hero-panel {
+        order: -1;
+      }
+      .hero-stats {
+        max-width: 100%;
+      }
+      .grid-3,
+      .people-grid,
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding-inline: 1rem;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        inset-inline: 1rem;
+        top: 100%;
+        margin-top: 0.5rem;
+        flex-direction: column;
+        background: rgba(15, 23, 42, 0.98);
+        border-radius: 16px;
+        border: 1px solid rgba(31, 41, 55, 0.95);
+        padding: 0.7rem 0.9rem;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-cta {
+        margin-top: 0.2rem;
+      }
+
+      .nav-toggle {
+        display: inline-block;
+      }
+
+      .hero {
+        padding-inline: 1rem;
+      }
+
+      .section {
+        padding-inline: 1rem;
+      }
+
+      .grid-3,
+      .people-grid,
+      .grid-2,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- NAVBAR -->
+    <header>
+      <nav class="nav">
+        <a href="#top" class="logo">
+          <div class="logo-mark">
+            <span>MA</span>
+          </div>
+          <div class="logo-text">
+            <div class="logo-text-main">MASAI-group</div>
+            <div class="logo-text-sub">Multi-Agent Systems & AI</div>
+          </div>
+        </a>
+
+        <div class="nav-links" id="nav-links">
+          <a href="#about">About</a>
+          <a href="#research">Research</a>
+          <a href="#people">People</a>
+          <a href="#publications">Publications</a>
+          <a href="#news">News</a>
+          <a href="#contact">Contact</a>
+          <a href="#contact" class="nav-cta">Collaborate with us</a>
+        </div>
+
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="section hero" aria-labelledby="hero-title">
+        <div>
+          <div class="eyebrow">MASAI-group · Research in AI</div>
+          <h1 class="hero-title" id="hero-title">
+            Strategic <span>Multi-Agent Systems</span> for Trustworthy AI.
+          </h1>
+          <p class="hero-lead">
+            MASAI-group studies formal models, algorithms, and tools for reasoning about
+            interaction, strategy, and decision-making in complex multi-agent systems –
+            from autonomous robots and cyber-physical systems to socio-economic environments.
+          </p>
+
+          <div class="hero-meta">
+            <span><span class="hero-meta-dot"></span> Formal methods</span>
+            <span>Strategic reasoning</span>
+            <span>Verification & synthesis</span>
+          </div>
+
+          <div class="hero-buttons">
+            <a href="#research" class="btn-primary">Explore our research</a>
+            <a href="#contact" class="btn-ghost">Open collaboration</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <div class="stat-value">10+*</div>
+              <div class="stat-label">Researchers & students</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">40+*</div>
+              <div class="stat-label">Peer-reviewed papers</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">3+*</div>
+              <div class="stat-label">Ongoing projects</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Research focus summary">
+          <div class="hero-panel-grid">
+            <div>
+              <div class="hero-panel-title">Research focus</div>
+              <div class="hero-badges">
+                <span class="badge">Strategic logics (ATL / NatATL)</span>
+                <span class="badge">Model checking & verification</span>
+                <span class="badge">Multi-agent decision-making</span>
+                <span class="badge">AI for safety-critical systems</span>
+              </div>
+            </div>
+
+            <div class="hero-panel-strip">
+              <span>From theory to deployed systems</span>
+              <span><strong>bridging logic, AI, and applications.</strong></span>
+            </div>
+
+            <p class="hero-panel-footnote">
+              We develop mathematical foundations and software tools to analyze what agents
+              can achieve in systems where interaction, uncertainty, and time are all crucial.
+            </p>
+          </div>
+
+          <div class="hero-orbit">
+            <div class="hero-orbit-circle"></div>
+            <div class="hero-orbit-circle"></div>
+            <div class="hero-orbit-dot"></div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="section" id="about" aria-labelledby="about-title">
+        <div class="section-header">
+          <div class="eyebrow">About us</div>
+          <h2 class="section-title" id="about-title">MASAI-group in a nutshell</h2>
+          <p class="section-subtitle">
+            We are a research group focusing on multi-agent systems and artificial
+            intelligence, with a strong emphasis on formal methods, logic, and strategic reasoning.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3 class="card-title">
+              Vision
+              <span class="card-pill">Trustworthy AI</span>
+            </h3>
+            <p class="card-text">
+              We envision AI systems composed of multiple interacting agents that are
+              not only powerful, but also explainable, reliable, and aligned with
+              human values. We believe that formal models and logics are key to
+              understanding and shaping the behaviour of such systems.
+            </p>
+            <p class="card-text">
+              By combining theoretical research with practical tools, we aim to close
+              the gap between formal guarantees and real-world deployments.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
+              Expertise
+              <span class="card-pill">Theory & practice</span>
+            </h3>
+            <p class="card-text">
+              Our expertise spans from the design of new strategic logics for
+              multi-agent interaction, to model checking algorithms, model
+              synthesis, and the integration of verification engines into
+              simulation environments and industrial frameworks.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Multi-agent systems</span>
+              <span class="tag">Alternating-time Temporal Logic (ATL)</span>
+              <span class="tag">Natural ATL (NatATL)</span>
+              <span class="tag">Model checking</span>
+              <span class="tag">Game-theoretic reasoning</span>
+              <span class="tag">AI in safety-critical domains</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- RESEARCH -->
+      <section class="section" id="research" aria-labelledby="research-title">
+        <div class="section-header">
+          <div class="eyebrow">Research areas</div>
+          <h2 class="section-title" id="research-title">What we work on</h2>
+          <p class="section-subtitle">
+            Our research covers foundational aspects of strategic reasoning as well as
+            applications to autonomous systems, economics, and digital transformation.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3 class="card-title">
+              Strategic logics
+              <span class="card-pill">Foundations</span>
+            </h3>
+            <p class="card-text">
+              We study and extend logics such as ATL and NatATL to reason about
+              what coalitions of agents can achieve under different information
+              and resource assumptions, in both synchronous and asynchronous settings.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Expressiveness & complexity</span>
+              <span class="tag">Strategy quantification</span>
+              <span class="tag">Incomplete information</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
+              Verification & synthesis
+              <span class="card-pill">Algorithms</span>
+            </h3>
+            <p class="card-text">
+              We develop model checking, strategy synthesis, and game-solving
+              techniques for multi-agent systems, with a focus on scalability and
+              integration with existing AI pipelines and simulators.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Symbolic model checking</span>
+              <span class="tag">A* and heuristic search</span>
+              <span class="tag">Runtime verification</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
+              Applications & tools
+              <span class="card-pill">From lab to field</span>
+            </h3>
+            <p class="card-text">
+              We work on applying strategic reasoning to domains such as autonomous
+              driving, digital health, smart industry, and interactive simulations,
+              building prototypes and tools for real-world stakeholders.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Unreal Engine integration</span>
+              <span class="tag">Decision support</span>
+              <span class="tag">Human-in-the-loop AI</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PEOPLE -->
+      <section class="section" id="people" aria-labelledby="people-title">
+        <div class="section-header">
+          <div class="eyebrow">People</div>
+          <h2 class="section-title" id="people-title">The team</h2>
+          <p class="section-subtitle">
+            MASAI-group brings together faculty, postdocs, PhD candidates, and MSc students
+            interested in the theory and practice of multi-agent AI.
+          </p>
+        </div>
+
+        <div class="people-grid">
+          <!-- Esempi: sostituisci i nomi/ruoli con quelli reali -->
+          <article class="person-card">
+            <h3 class="person-name">Prof. Name Surname</h3>
+            <p class="person-role">Group Lead · Full Professor</p>
+            <p class="person-affiliation">
+              Department of Computer Science, University Name
+            </p>
+            <div class="person-meta">
+              <span>Research interests: formal methods, temporal logics, multi-agent systems.</span>
+              <span>Email: <a href="mailto:name.surname@university.example">name.surname@university.example</a></span>
+            </div>
+          </article>
+
+          <article class="person-card">
+            <h3 class="person-name">Dr. Name Surname</h3>
+            <p class="person-role">Postdoctoral Researcher</p>
+            <p class="person-affiliation">
+              MASAI-group, University Name
+            </p>
+            <div class="person-meta">
+              <span>Research interests: strategic reasoning, AI in safety-critical systems.</span>
+              <span>Email: <a href="mailto:researcher@university.example">researcher@university.example</a></span>
+            </div>
+          </article>
+
+          <article class="person-card">
+            <h3 class="person-name">Name Surname</h3>
+            <p class="person-role">PhD Candidate</p>
+            <p class="person-affiliation">
+              MASAI-group, University Name
+            </p>
+            <div class="person-meta">
+              <span>Research interests: model checking, game-theoretic models.</span>
+              <span>Email: <a href="mailto:phd.student@university.example">phd.student@university.example</a></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PUBLICATIONS -->
+      <section class="section" id="publications" aria-labelledby="publications-title">
+        <div class="section-header">
+          <div class="eyebrow">Publications</div>
+          <h2 class="section-title" id="publications-title">Selected work</h2>
+          <p class="section-subtitle">
+            A short selection of recent publications. For a complete list, please contact us
+            or visit our institutional profiles.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="pub-list">
+            <!-- Esempi di placeholder: sostituisci con le tue pubblicazioni -->
+            <article class="pub-item">
+              <h3 class="pub-title">
+                Strategic Verification of Multi-Agent Systems via Natural ATL
+              </h3>
+              <p class="pub-meta">
+                A. Author, B. Author. <em>Conference on Autonomous Agents and Multiagent Systems (AAMAS)</em>, 2024.
+              </p>
+              <div class="pub-links">
+                <a href="#" class="pub-link">Preprint</a>
+                <a href="#" class="pub-link">Publisher</a>
+                <span class="pub-link">Logic & verification</span>
+              </div>
+            </article>
+
+            <article class="pub-item">
+              <h3 class="pub-title">
+                Integrating ATL Model Checking into Game Engines for Dynamic NPC Behaviour
+              </h3>
+              <p class="pub-meta">
+                C. Author, D. Author. <em>Journal of AI and Interactive Digital Media</em>, 2023.
+              </p>
+              <div class="pub-links">
+                <a href="#" class="pub-link">PDF</a>
+                <span class="pub-link">Game AI</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="pub-list">
+            <article class="pub-item">
+              <h3 class="pub-title">
+                Formal Reasoning about Coalitional Strategies under Uncertainty
+              </h3>
+              <p class="pub-meta">
+                E. Author, F. Author. <em>International Conference on Logic in Computer Science</em>, 2022.
+              </p>
+              <div class="pub-links">
+                <a href="#" class="pub-link">DOI</a>
+                <span class="pub-link">Strategic reasoning</span>
+              </div>
+            </article>
+
+            <article class="pub-item">
+              <h3 class="pub-title">
+                Model Checking for Multi-Agent Systems in Safety-Critical Domains
+              </h3>
+              <p class="pub-meta">
+                G. Author et al. <em>Formal Methods in System Design</em>, 2021.
+              </p>
+              <div class="pub-links">
+                <a href="#" class="pub-link">Preprint</a>
+                <span class="pub-link">Safety-critical systems</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEWS -->
+      <section class="section" id="news" aria-labelledby="news-title">
+        <div class="section-header">
+          <div class="eyebrow">News & events</div>
+          <h2 class="section-title" id="news-title">Recent highlights</h2>
+          <p class="section-subtitle">
+            Seminars, invited talks, project updates, and other highlights from MASAI-group.
+          </p>
+        </div>
+
+        <div class="news-list">
+          <!-- Placeholder: aggiorna con le notizie reali -->
+          <article class="news-item">
+            <div>
+              <strong>MASAI-group talk at international workshop on multi-agent logics</strong><br />
+              We presented our latest work on strategy synthesis for NatATL at an international
+              workshop on multi-agent logics and verification.
+            </div>
+            <div class="news-date">May 2025</div>
+          </article>
+
+          <article class="news-item">
+            <div>
+              <strong>New collaboration on AI in digital health</strong><br />
+              We joined a multidisciplinary project on applying multi-agent reasoning to digital
+              health and personalized decision support systems.
+            </div>
+            <div class="news-date">February 2025</div>
+          </article>
+
+          <article class="news-item">
+            <div>
+              <strong>PhD and MSc thesis opportunities</strong><br />
+              We are offering new thesis topics on multi-agent logic, model checking for AI, and
+              interactive simulations.
+            </div>
+            <div class="news-date">Open</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section" id="contact" aria-labelledby="contact-title">
+        <div class="section-header">
+          <div class="eyebrow">Contact & collaboration</div>
+          <h2 class="section-title" id="contact-title">Get in touch</h2>
+          <p class="section-subtitle">
+            MASAI-group is open to collaborations with academia, industry, and public institutions
+            interested in rigorous, explainable multi-agent AI.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="contact-card">
+            <h3>Contact details</h3>
+            <p>
+              For inquiries about collaborations, thesis supervision, or project proposals,
+              you can reach us using the contact information below.
+            </p>
+
+            <div class="contact-details">
+              <div>
+                <span>Email:</span>
+                &nbsp;<a href="mailto:masai-group@university.example">masai-group@university.example</a>
+              </div>
+              <div>
+                <span>Address:</span>
+                &nbsp;Department of Computer Science, University Name, City, Country
+              </div>
+              <div>
+                <span>Office hours:</span>
+                &nbsp;By appointment
+              </div>
+            </div>
+
+            <p class="contact-note">
+              Please include a short description of your background and interests if you are
+              contacting us about research opportunities.
+            </p>
+          </article>
+
+          <aside class="contact-aside">
+            <h3>How we collaborate</h3>
+            <p>
+              We are particularly interested in projects where strategic reasoning, formal
+              guarantees, and AI come together. Examples include:
+            </p>
+            <ul>
+              <li>Verification of AI components in safety-critical systems</li>
+              <li>Design of strategic models for complex socio-technical scenarios</li>
+              <li>Integration of multi-agent reasoning into simulations and digital twins</li>
+            </ul>
+            <p>
+              If you have an idea, we are happy to discuss how MASAI-group can help.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <span>© <span id="year"></span> MASAI-group · Multi-Agent Systems & Artificial Intelligence.</span>
+        <span>Static website · No login required · All visitors welcome.</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile navigation toggle
+    const navToggle = document.getElementById("nav-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    // Close mobile nav when a link is clicked
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+      });
+    });
+
+    // Current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
