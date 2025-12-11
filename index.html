@@ -88,27 +88,31 @@
       gap: 0.75rem;
     }
 
-    .logo-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #38bdf8, #0ea5e9 40%, #1e293b 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
-      position: relative;
-      overflow: hidden;
-    }
+     .logo-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+    background: none; /* opzionale, per togliere il gradient precedente */
+    position: relative;
+  }
+  
+  .logo-mark::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(15, 23, 42, 0.3);
+  }
+  
+  .logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-    .logo-mark::after {
-      content: "";
-      position: absolute;
-      inset: 18%;
-      border-radius: inherit;
-      border: 1px solid rgba(15, 23, 42, 0.3);
-      backdrop-filter: blur(6px);
-    }
 
     .logo-mark span {
       font-size: 0.9rem;
