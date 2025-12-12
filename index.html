@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta
     name="description"
-    content=We are an interdisciplinary research group studying intelligent and trustworthy networked systems. Our work spans complex networks, generative AI, multi-agent systems, multimedia forensics, formal methods, and deepfake detection, with the goal of making AI-driven technologies more robust, secure, and reliable in the real world."
+    content="We are an interdisciplinary research group studying intelligent and trustworthy networked systems. Our work spans complex networks, generative AI, multi-agent systems, multimedia forensics, formal methods, and deepfake detection."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -88,38 +88,29 @@
       gap: 0.75rem;
     }
 
-     .logo-mark {
-    width: 44px;
-    height: 44px;
-    border-radius: 999px;
-    overflow: hidden;
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
-    background: none; /* opzionale, per togliere il gradient precedente */
-    position: relative;
-  }
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+      background: none; 
+      position: relative;
+    }
   
-  .logo-mark::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    border: 1px solid rgba(15, 23, 42, 0.3);
-  }
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid rgba(15, 23, 42, 0.3);
+    }
   
-  .logo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-
-    .logo-mark span {
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: #e0f2fe;
-      z-index: 1;
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .logo-text {
@@ -541,50 +532,110 @@
       color: var(--text-soft);
     }
 
-    /* People */
+    /* People - UPDATED */
     .people-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.4rem;
+      align-items: start; /* Ensures cards don't stretch weirdly if lengths differ */
     }
 
     .person-card {
       border-radius: var(--radius-lg);
       background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), #020617 85%);
       border: 1px solid var(--border);
-      padding: 1.2rem 1.3rem;
+      padding: 1.5rem;
       box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .person-header {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .person-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(56, 189, 248, 0.5);
+      background: #0f172a; /* Fallback color */
+    }
+
+    .person-info {
+        flex: 1;
     }
 
     .person-name {
       margin: 0;
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #fff;
     }
 
     .person-role {
-      margin: 0.15rem 0 0.35rem;
-      font-size: 0.82rem;
+      margin: 0.2rem 0 0;
+      font-size: 0.78rem;
       color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .person-tagline {
+        margin: 0 0 1rem;
+        font-style: italic;
+        color: #bae6fd;
+        font-size: 0.85rem;
+        border-left: 2px solid var(--accent);
+        padding-left: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .person-bio {
+        font-size: 0.86rem;
+        color: var(--text-soft);
+        margin-bottom: 1.2rem;
+        line-height: 1.55;
+        flex-grow: 1;
+    }
+
+    .person-section-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 700;
+        color: #e5e7eb;
+        margin-bottom: 0.4rem;
+        display: block;
     }
 
     .person-affiliation {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin: 0 0 0.6rem;
-    }
-
-    .person-meta {
       font-size: 0.78rem;
       color: var(--text-soft);
+      margin: 0 0 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 0.8rem;
+    }
+    
+    .person-contact {
+        font-size: 0.8rem;
+        color: var(--text-soft);
+        margin-top: 0.4rem;
     }
 
-    .person-meta span {
-      display: block;
+    .person-contact a {
+        color: #38bdf8;
+        transition: color 0.2s;
     }
-
-    .person-meta a {
-      color: #bae6fd;
+    
+    .person-contact a:hover {
+        color: #fff;
     }
 
     /* Publications */
@@ -797,19 +848,17 @@
 </head>
 <body>
   <div class="page-wrapper">
-    <!-- NAVBAR -->
     <header>
       <nav class="nav">
         <a href="#top" class="logo">
           <div class="logo-mark">
-            <img src="masai-logo.png" alt="MASAI-group logo" class="logo-img" />
+            <img src="images/masai-logo.png" alt="MASAI-group logo" class="logo-img" />
           </div>
           <div class="logo-text">
             <div class="logo-text-main">MASAI-group</div>
             <div class="logo-text-sub">Multi-Agent Systems & AI</div>
           </div>
         </a>
-
 
         <div class="nav-links" id="nav-links">
           <a href="#about">About</a>
@@ -830,7 +879,6 @@
     </header>
 
     <main id="top">
-      <!-- HERO -->
       <section class="section hero" aria-labelledby="hero-title">
         <div>
           <div class="eyebrow">MASAI-group: Research in AI</div>
@@ -899,13 +947,12 @@
         </aside>
       </section>
 
-      <!-- ABOUT -->
       <section class="section" id="about" aria-labelledby="about-title">
         <div class="section-header">
           <div class="eyebrow">About us</div>
           <h2 class="section-title" id="about-title">MASAI-group in a nutshell</h2>
           <p class="section-subtitle">
-            WWe are an interdisciplinary research group studying intelligent and trustworthy networked systems thorugh neuro-symbolic AI pipelines. 
+            We are an interdisciplinary research group studying intelligent and trustworthy networked systems through neuro-symbolic AI pipelines.
           </p>
         </div>
 
@@ -951,7 +998,6 @@
         </div>
       </section>
 
-      <!-- RESEARCH -->
       <section class="section" id="research" aria-labelledby="research-title">
         <div class="section-header">
           <div class="eyebrow">Research areas</div>
@@ -1026,7 +1072,6 @@
         </div>
       </section>
 
-      <!-- PEOPLE -->
       <section class="section" id="people" aria-labelledby="people-title">
         <div class="section-header">
           <div class="eyebrow">People</div>
@@ -1037,48 +1082,97 @@
         </div>
 
         <div class="people-grid">
-          <!-- Esempi: sostituisci i nomi/ruoli con quelli reali -->
+          
           <article class="person-card">
-            <h3 class="person-name">Aiwin Thomas Vadakkan</h3>
-            <p class="person-role">ITEE PhD Student, XL Cycle</p>
-            <p class="person-affiliation">
-              Department of Electrical Enginnering and Informaton Techonology, Univeristy of Naples Federico II
+            <div class="person-header">
+              <img src="https://ui-avatars.com/api/?name=Aiwin+Thomas+Vadakkan&background=020617&color=38bdf8" alt="Aiwin Thomas Vadakkan" class="person-photo" />
+              <div class="person-info">
+                <h3 class="person-name">Aiwin Thomas Vadakkan</h3>
+                <p class="person-role">ITEE PhD Student, XL Cycle</p>
+              </div>
+            </div>
+            
+            <p class="person-tagline">"tagline"</p>
+            
+            <p class="person-bio">
+              Aiwin...
             </p>
-            <div class="person-meta">
-              <span>Research interests: Nonlinear Dynamics, Complex networks.</span>
-              <span>Email: <a href="mailto:aiwin.thomasvadakkan@unina.it">aiwin.thomasvadakkan@unina.it</a></span>
+
+            <div class="person-details">
+                <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
+                <span class="person-section-label">Research Interests</span>
+                <div class="tag-row" style="margin-bottom: 1rem;">
+                    <span class="tag">Nonlinear Dynamics</span>
+                    <span class="tag">Complex Networks</span>
+                    <span class="tag">Synchronization</span>
+                </div>
+                <div class="person-contact">
+                    <span>Email:</span>&nbsp;<a href="mailto:aiwin.thomasvadakkan@unina.it">aiwin.thomasvadakkan@unina.it</a>
+                </div>
             </div>
           </article>
 
           <article class="person-card">
-            <h3 class="person-name">Marco Aruta</h3>
-            <p class="person-role">ITEE PhD Student, XL Cycle</p>
-            <p class="person-affiliation">
-              Department of Electrical Enginnering and Informaton Techonology, Univeristy of Naples Federico II
+             <div class="person-header">
+              <img src="https://ui-avatars.com/api/?name=Marco+Aruta&background=020617&color=38bdf8" alt="Marco Aruta" class="person-photo" />
+              <div class="person-info">
+                <h3 class="person-name">Marco Aruta</h3>
+                <p class="person-role">ITEE PhD Student, XL Cycle</p>
+              </div>
+            </div>
+
+            <p class="person-tagline">"tagline"</p>
+
+            <p class="person-bio">
+              Marco...
             </p>
-            <div class="person-meta">
-              <span>Research interests: Strategic Reasoning, AI in safety-critical domanins.</span>
-              <span>Email: <a href="mailto:marco.aruta@unina.it">marco.aruta@unina.it</a></span>
+
+            <div class="person-details">
+                <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
+                <span class="person-section-label">Research Interests</span>
+                <div class="tag-row" style="margin-bottom: 1rem;">
+                    <span class="tag">Strategic Reasoning</span>
+                    <span class="tag">Formal Verification</span>
+                    <span class="tag">Safety-Critical AI</span>
+                </div>
+                <div class="person-contact">
+                    <span>Email:</span>&nbsp;<a href="mailto:marco.aruta@unina.it">marco.aruta@unina.it</a>
+                </div>
             </div>
           </article>
 
           <article class="person-card">
-            <h3 class="person-name">Vincenzo De Rosa</h3>
-            <p class="person-role">ITEE PhD Student, XL Cycle</p>
-            <p class="person-affiliation">
-              Department of Electrical Engineering and Information Technology, University of Naples Federico II
+            <div class="person-header">
+              <img src="https://ui-avatars.com/api/?name=Vincenzo+De+Rosa&background=020617&color=38bdf8" alt="Vincenzo De Rosa" class="person-photo" />
+              <div class="person-info">
+                <h3 class="person-name">Vincenzo De Rosa</h3>
+                <p class="person-role">ITEE PhD Student, XL Cycle</p>
+              </div>
+            </div>
+
+            <p class="person-tagline">"Defending digital reality in the age of Generative AI."</p>
+
+            <p class="person-bio">
+              Vincenzo investigates the integrity of digital media. His research focuses on exposing synthetic content (deepfakes) and defending forensic detectors against adversarial attacks, ensuring reliability in increasingly hostile digital environments.
             </p>
 
-            <div class="person-meta">
-              <p><strong>Research interests:</strong> Multimedia Forensics, Generative AI, Adversarial Attacks.</p>
-              <p><strong>Email:</strong> <a href="mailto:vincenzo.derosa3@unina.it">vincenzo.derosa3@unina.it</a></p>
+             <div class="person-details">
+                <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
+                <span class="person-section-label">Research Interests</span>
+                <div class="tag-row" style="margin-bottom: 1rem;">
+                    <span class="tag">Multimedia Forensics</span>
+                    <span class="tag">Generative AI</span>
+                    <span class="tag">Adversarial Attacks</span>
+                </div>
+                <div class="person-contact">
+                    <span>Email:</span>&nbsp;<a href="mailto:vincenzo.derosa3@unina.it">vincenzo.derosa3@unina.it</a>
+                </div>
             </div>
           </article>
 
         </div>
       </section>
 
-      <!-- PUBLICATIONS -->
       <section class="section" id="publications" aria-labelledby="publications-title">
         <div class="section-header">
           <div class="eyebrow">Publications</div>
@@ -1091,7 +1185,7 @@
 
         <div class="grid-2">
           <div class="pub-list">
-            <!-- Esempi di placeholder: sostituisci con le tue pubblicazioni -->
+            
             <article class="pub-item">
               <h3 class="pub-title">
                 Recovery of synchronized oscillations on multiplex networks by tuning dynamical time scales
@@ -1249,7 +1343,6 @@
         </div>
       </section>
 
-      <!-- NEWS -->
       <section class="section" id="news" aria-labelledby="news-title">
         <div class="section-header">
           <div class="eyebrow">News & events</div>
@@ -1260,7 +1353,6 @@
         </div>
 
         <div class="news-list">
-          <!-- Placeholder: aggiorna con le notizie reali -->
           <article class="news-item">
             <div>
               <strong>MASAI-group talk at Stem Writing class of 2025</strong><br />
@@ -1268,12 +1360,9 @@
             </div>
             <div class="news-date">May 2025</div>
           </article>
-
-  
         </div>
       </section>
 
-      <!-- CONTACT -->
       <section class="section" id="contact" aria-labelledby="contact-title">
         <div class="section-header">
           <div class="eyebrow">Contact & collaboration</div>
@@ -1337,7 +1426,6 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
     <footer>
       <div class="footer-inner">
         <span>© <span id="year"></span> MASAI-group · Multi-Agent Systems & Artificial Intelligence.</span>
