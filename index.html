@@ -481,12 +481,84 @@
       gap: 1.4rem;
     }
 
-    .card {
+    /* === UNIVERSAL CARD ANIMATION STYLES === 
+       Applying the 'People Card' hover effect to all card types:
+       .card, .stat-card, .person-card, .pub-item, .news-item, .contact-card
+    */
+
+    .card, 
+    .stat-card,
+    .person-card,
+    .pub-item,
+    .news-item,
+    .contact-card {
+      /* Base styles */
       background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.92), #020617 85%);
       border-radius: var(--radius-lg);
       border: 1px solid var(--border);
-      padding: 1.35rem 1.5rem;
       box-shadow: 0 16px 38px rgba(15, 23, 42, 0.7);
+      
+      /* Animation Transition */
+      transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  box-shadow 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  border-color 0.25s ease;
+    }
+
+    /* Override backgrounds for specific cards that had unique ones, 
+       but keep the structure shared for animation */
+    .stat-card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), #020617 80%);
+      padding: 0.9rem 1rem;
+    }
+    
+    .card {
+      padding: 1.35rem 1.5rem;
+    }
+
+    .person-card {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), #020617 85%);
+      padding: 1.8rem 1.5rem; 
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card {
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), #020617 80%);
+      padding: 1.4rem 1.5rem;
+    }
+
+    .pub-item {
+      padding: 0.9rem 1rem;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .news-item {
+      padding: 0.8rem 1rem;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1.3rem;
+      font-size: 0.86rem;
+    }
+
+    /* === UNIVERSAL HOVER STATE === */
+    .card:hover, 
+    .stat-card:hover,
+    .person-card:hover,
+    .pub-item:hover,
+    .news-item:hover,
+    .contact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.8);
+      border-color: rgba(56, 189, 248, 0.3); /* The nice blue tint */
     }
 
     .card-title {
@@ -532,123 +604,119 @@
       color: var(--text-soft);
     }
 
-    /* People - UPDATED */
+    /* People specific internals */
     .people-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.4rem;
-      align-items: start; /* Ensures cards don't stretch weirdly if lengths differ */
-    }
-
-    .person-card {
-      border-radius: var(--radius-lg);
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), #020617 85%);
-      border: 1px solid var(--border);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+      align-items: start;
     }
 
     .person-header {
       display: flex;
+      flex-direction: column; /* Stacked Vertically */
       gap: 1rem;
-      align-items: center;
-      margin-bottom: 1.2rem;
+      align-items: center; /* Centered */
+      text-align: center;
+      margin-bottom: 1.5rem;
     }
 
     .person-photo {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
+      width: 150px; 
+      height: 150px;
+      border-radius: 24px; /* Squircle shape */
       object-fit: cover;
-      border: 2px solid rgba(56, 189, 248, 0.5);
-      background: #0f172a; /* Fallback color */
+      border: 3px solid rgba(56, 189, 248, 0.3);
+      background: #0f172a;
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
     }
 
     .person-info {
-        flex: 1;
+      width: 100%;
     }
 
     .person-name {
       margin: 0;
-      font-size: 1.05rem;
+      font-size: 1.25rem;
       font-weight: 700;
       line-height: 1.2;
       color: #fff;
     }
 
     .person-role {
-      margin: 0.2rem 0 0;
-      font-size: 0.78rem;
+      margin: 0.35rem 0 0;
+      font-size: 0.8rem;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
+      font-weight: 600;
     }
 
     .person-tagline {
-        margin: 0 0 1rem;
-        font-style: italic;
-        color: #bae6fd;
-        font-size: 0.85rem;
-        border-left: 2px solid var(--accent);
-        padding-left: 0.8rem;
-        line-height: 1.4;
+      margin: 0 0 1.2rem;
+      font-style: italic;
+      color: #bae6fd;
+      font-size: 0.9rem;
+      text-align: center;
+      border-top: 1px solid rgba(56, 189, 248, 0.2);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 0.8rem 0;
+      line-height: 1.5;
     }
 
     .person-bio {
-        font-size: 0.86rem;
-        color: var(--text-soft);
-        margin-bottom: 1.2rem;
-        line-height: 1.55;
-        flex-grow: 1;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .person-details {
+      background: rgba(15, 23, 42, 0.6);
+      margin: 0 -1.5rem -1.8rem; /* Stretch to edges */
+      padding: 1.2rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .person-section-label {
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-weight: 700;
-        color: #e5e7eb;
-        margin-bottom: 0.4rem;
-        display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: #e5e7eb;
+      margin-bottom: 0.6rem;
+      display: block;
     }
 
     .person-affiliation {
       font-size: 0.78rem;
       color: var(--text-soft);
       margin: 0 0 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
       padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .person-contact {
-        font-size: 0.8rem;
-        color: var(--text-soft);
-        margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 0.4rem;
     }
 
     .person-contact a {
-        color: #38bdf8;
-        transition: color 0.2s;
+      color: #38bdf8;
+      transition: color 0.2s;
     }
     
     .person-contact a:hover {
-        color: #fff;
+      color: #fff;
     }
 
     /* Publications */
     .pub-list {
       display: grid;
       gap: 0.95rem;
-    }
-
-    .pub-item {
-      padding: 0.9rem 1rem;
-      border-radius: 14px;
-      background: rgba(15, 23, 42, 0.96);
-      border: 1px solid rgba(31, 41, 55, 0.9);
     }
 
     .pub-title {
@@ -687,18 +755,6 @@
       gap: 0.9rem;
     }
 
-    .news-item {
-      padding: 0.8rem 1rem;
-      border-radius: 14px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(31, 41, 55, 0.9);
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1.3rem;
-      font-size: 0.86rem;
-    }
-
     .news-date {
       font-size: 0.8rem;
       color: var(--text-soft);
@@ -709,15 +765,6 @@
       display: grid;
       grid-template-columns: 3fr 2.4fr;
       gap: 2rem;
-    }
-
-    .contact-card {
-      border-radius: var(--radius-lg);
-      padding: 1.4rem 1.5rem;
-      border: 1px solid var(--border);
-      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), #020617 80%);
-      box-shadow: var(--shadow-soft);
-      font-size: 0.9rem;
     }
 
     .contact-card p {
@@ -886,7 +933,7 @@
             Strategic <span>Multi-Agent Systems</span> for Trustworthy <span>AI</span>.
           </h1>
           <p class="hero-lead">
-            We are an interdisciplinary research group exploring the foundations and frontiers of intelligent, trustworthy networked systems. Our work spans complex networks and multi-agent systems, generative AI and multimedia forensics, formal methods and deepfake detection, with a shared goal of understanding, shaping, and securing large-scale interconnected digital ecosystems. By combining rigorous theory with data-driven methods, we design principled algorithms and tools to make modern AI-enabled systems more robust, explainable, and resilient in the real world.
+            We are an interdisciplinary research group exploring the foundations and frontiers of intelligent, trustworthy networked systems. Our work spans complex networks, generative AI, multi-agent systems, multimedia forensics, formal methods, and deepfake detection, with a shared goal of understanding, shaping, and securing large-scale interconnected digital ecosystems. By combining rigorous theory with data-driven methods, we design principled algorithms and tools to make modern AI-enabled systems more robust, explainable, and resilient in the real world.
           </p>
 
           <div class="hero-meta">
@@ -942,8 +989,7 @@
           <div class="hero-orbit">
             <div class="hero-orbit-circle"></div>
             <div class="hero-orbit-circle"></div>
-            <div class="hero-orbit-dot"></div>
-          </div>
+            </div>
         </aside>
       </section>
 
@@ -957,6 +1003,7 @@
         </div>
 
         <div class="grid-2">
+          
           <article class="card">
             <h3 class="card-title">
               Vision
@@ -977,6 +1024,34 @@
 
           <article class="card">
             <h3 class="card-title">
+              Our Values
+              <span class="card-pill">Core Beliefs</span>
+            </h3>
+            <p class="card-text">
+              Our work is grounded in <strong>Rigorous Integrity</strong>, ensuring every result is reproducible and theoretically sound. We champion <strong>Open Science</strong> by sharing our datasets and tools to accelerate global progress, and we uphold <strong>Ethical Responsibility</strong>, prioritizing the societal safety of the AI systems we analyze.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Scientific Rigor</span>
+              <span class="tag">Open Collaboration</span>
+              <span class="tag">Ethical AI</span>
+            </div>
+          </article>
+
+          <article class="card"> 
+            <h3 class="card-title">
+              Statement on Teamwork
+              <span class="card-pill">Our Philosophy</span>
+            </h3>
+            <p class="card-text">
+              At MASAI-group, we operate as a <strong>flat, distributed collective</strong> where innovation outweighs hierarchy. We adopt an <strong>Agile Research methodology</strong>, utilizing weekly cross-disciplinary syncs to iteratively refine mathematical models and codebases.
+            </p>
+            <p class="card-text">
+               We cultivate a culture of <strong>psychological safety</strong>, where constructive dissent is encouraged as the fastest path to scientific truth, ensuring that every PhD candidate contributes to shaping our strategic direction.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">
               Expertise
               <span class="card-pill">Theory & practice</span>
             </h3>
@@ -988,11 +1063,11 @@
             </p>
             <div class="tag-row">
               <span class="tag">Multi-agent systems</span>
-              <span class="tag">Alternating-time Temporal Logic (ATL)</span>
               <span class="tag">Natural ATL (NatATL)</span>
               <span class="tag">Model checking</span>
               <span class="tag">Game-theoretic reasoning</span>
               <span class="tag">AI in safety-critical domains</span>
+              <span class="tag">Generative AI</span>
             </div>
           </article>
         </div>
@@ -1099,21 +1174,21 @@
             </p>
 
             <div class="person-details">
-                <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
-                <span class="person-section-label">Research Interests</span>
-                <div class="tag-row" style="margin-bottom: 1rem;">
-                    <span class="tag">Nonlinear Dynamics</span>
-                    <span class="tag">Complex Networks</span>
-                    <span class="tag">Synchronization</span>
-                </div>
-                <div class="person-contact">
-                    <span>Email:</span>&nbsp;<a href="mailto:aiwin.thomasvadakkan@unina.it">aiwin.thomasvadakkan@unina.it</a>
-                </div>
+              <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
+              <span class="person-section-label">Research Interests</span>
+              <div class="tag-row" style="margin-bottom: 1rem;">
+                  <span class="tag">Nonlinear Dynamics</span>
+                  <span class="tag">Complex Networks</span>
+                  <span class="tag">Synchronization</span>
+              </div>
+              <div class="person-contact">
+                  <span>Email:</span>&nbsp;<a href="mailto:aiwin.thomasvadakkan@unina.it">aiwin.thomasvadakkan@unina.it</a>
+              </div>
             </div>
           </article>
 
           <article class="person-card">
-             <div class="person-header">
+              <div class="person-header">
               <img src="https://ui-avatars.com/api/?name=Marco+Aruta&background=020617&color=38bdf8" alt="Marco Aruta" class="person-photo" />
               <div class="person-info">
                 <h3 class="person-name">Marco Aruta</h3>
@@ -1128,16 +1203,16 @@
             </p>
 
             <div class="person-details">
-                <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
-                <span class="person-section-label">Research Interests</span>
-                <div class="tag-row" style="margin-bottom: 1rem;">
-                    <span class="tag">Strategic Reasoning</span>
-                    <span class="tag">Formal Verification</span>
-                    <span class="tag">Safety-Critical AI</span>
-                </div>
-                <div class="person-contact">
-                    <span>Email:</span>&nbsp;<a href="mailto:marco.aruta@unina.it">marco.aruta@unina.it</a>
-                </div>
+              <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
+              <span class="person-section-label">Research Interests</span>
+              <div class="tag-row" style="margin-bottom: 1rem;">
+                  <span class="tag">Strategic Reasoning</span>
+                  <span class="tag">Formal Verification</span>
+                  <span class="tag">Safety-Critical AI</span>
+              </div>
+              <div class="person-contact">
+                  <span>Email:</span>&nbsp;<a href="mailto:marco.aruta@unina.it">marco.aruta@unina.it</a>
+              </div>
             </div>
           </article>
 
@@ -1153,10 +1228,10 @@
             <p class="person-tagline">"Defending digital reality in the age of Generative AI."</p>
 
             <p class="person-bio">
-              Vincenzo investigates the integrity of digital media. His research focuses on exposing synthetic content (deepfakes) and defending forensic detectors against adversarial attacks, ensuring reliability in increasingly hostile digital environments.
+              Vincenzo investigates the integrity of digital media. His research focuses on exposing synthetic media and defending forensic detectors against adversarial attacks, ensuring reliability in increasingly hostile digital environments.
             </p>
 
-             <div class="person-details">
+              <div class="person-details">
                 <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
                 <span class="person-section-label">Research Interests</span>
                 <div class="tag-row" style="margin-bottom: 1rem;">
@@ -1166,6 +1241,35 @@
                 </div>
                 <div class="person-contact">
                     <span>Email:</span>&nbsp;<a href="mailto:vincenzo.derosa3@unina.it">vincenzo.derosa3@unina.it</a>
+                </div>
+            </div>
+          </article>
+
+          <article class="person-card">
+            <div class="person-header">
+              <img src="https://ui-avatars.com/api/?name=Name+Surname&background=020617&color=38bdf8" alt="Name Surname" class="person-photo" />
+              <div class="person-info">
+                <h3 class="person-name">Name Surname</h3>
+                <p class="person-role">PhD Student, XL Cycle</p>
+              </div>
+            </div>
+
+            <p class="person-tagline">"tagline"</p>
+
+            <p class="person-bio">
+              Name...
+            </p>
+
+              <div class="person-details">
+                <p class="person-affiliation">Department of Electrical Engineering and Information Technology, University of Naples Federico II</p>
+                <span class="person-section-label">Research Interests</span>
+                <div class="tag-row" style="margin-bottom: 1rem;">
+                    <span class="tag">1</span>
+                    <span class="tag">2</span>
+                    <span class="tag">3</span>
+                </div>
+                <div class="person-contact">
+                    <span>Email:</span>&nbsp;<a href="mailto:name.surname@unina.it">name.surname@unina.it</a>
                 </div>
             </div>
           </article>
@@ -1200,7 +1304,7 @@
               </div>
             </article>
 
-                        <article class="pub-item">
+            <article class="pub-item">
               <h3 class="pub-title">
                 Relay synchronization and control of dynamics in multiplex networks with unidirectional inter layer coupling
               </h3>
